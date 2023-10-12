@@ -5,6 +5,8 @@ import dev.richryl.booksphere.book.BookRepository;
 import dev.richryl.booksphere.exception.EntityException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RatingService {
 
@@ -21,7 +23,7 @@ public class RatingService {
             throw new EntityException("Book not found");
         }
 
-        int id = ratingRepository.findByBookIdAndUserId(rating.getBookId(), rating.getUserId());
+        int id = ratingRepository.findByBookIdAndUserId(rating.getBookId(), rating.getUserId()).getId();
         if (id != 0) {
             rating.setId(id);
         }
@@ -34,7 +36,7 @@ public class RatingService {
             throw new EntityException("Book not found");
         }
 
-        int id = ratingRepository.findByBookIdAndUserId(rating.getBookId(), userId);
+        int id = ratingRepository.findByBookIdAndUserId(rating.getBookId(), userId).getId();
         if (id != 0) {
             rating.setId(id);
         }
@@ -56,8 +58,12 @@ public class RatingService {
         return ratingRepository.countByBookId(bookId);
     }
 
-    public Integer findByBookIdAndUserId(String bookId, String userId) {
+    public Rating findByBookIdAndUserId(String bookId, String userId) {
         return ratingRepository.findByBookIdAndUserId(bookId, userId);
+    }
+
+    public List<Rating> findAllByUserId(String userId) {
+        return ratingRepository.findAllByUserId(userId);
     }
 
     public Double averageByBookId(String bookId) {

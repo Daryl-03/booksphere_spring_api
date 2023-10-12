@@ -9,6 +9,7 @@ import dev.richryl.booksphere.book_genre.BookGenreRepository;
 import dev.richryl.booksphere.exception.EntityException;
 import dev.richryl.booksphere.genre.Genre;
 import dev.richryl.booksphere.genre.GenreRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -42,17 +43,26 @@ public class BookService {
      * @param page
      * @return page of books
      */
-    public List<Book> getBooks(Integer page, Integer size) {
+    public BookPageResult getBooks(Integer page, Integer size) {
         if(size == null) {
             size = PAGE_SIZE;
         }
-        List<Book> books = bookRepository.findAll(PageRequest.of(page, size, Sort.sort(Book.class).by(Book::getRating).descending())).toList();
+        Page<Book> bookPage = bookRepository.findAll(PageRequest.of(page, size, Sort.sort(Book.class).by(Book::getRating).descending()));
+        List<Book> books = bookPage.toList();
 
         books.forEach(this::fillBookAdditionalInfo);
 
 //        System.out.println("first one genres size = " + books.get(0).getGenres().size());
 
-        return books;
+        return new BookPageResult(
+            new PaginationInfo(
+                    bookPage.getTotalElements(),
+                    bookPage.getNumber(),
+                    bookPage.getSize(),
+                    bookPage.getTotalPages()
+                    ),
+                books
+                );
     }
 
     public void updateBook(Book book) {
@@ -69,12 +79,13 @@ public class BookService {
         );
     }
 
-    public List<Book> findBookByTitle(String title, Integer page) {
-        List<Book> books = bookRepository.findAllByTitleContainsIgnoreCaseOrderByRatingDesc(title, PageRequest.of(page, PAGE_SIZE)).toList();
+    public BookPageResult findBookByTitle(String title, Integer page) {
+        Page<Book> bookPage = bookRepository.findAllByTitleContainsIgnoreCaseOrderByRatingDesc(title, PageRequest.of(page, PAGE_SIZE));
+        List<Book> books = bookPage.toList();
 
         books.forEach(this::fillBookAdditionalInfo);
 
-        return books;
+        return new BookPageResult(new PaginationInfo(bookPage), books);
     }
 
     public Book findBookByIsbn13(String isbn) {
@@ -85,10 +96,20 @@ public class BookService {
         return book;
     }
 
-    public List<Book> findBookByAuthor(String author, Integer page) {
-        List<Integer> authors = authorRepository.findAllByNameContainsIgnoreCase(author, PageRequest.of(page,SEARCH_BY_AUTHOR_PAGE_SIZE)).stream().map(Author::getId).toList();
+    public BookPageResult findBookByAuthor(String author, Integer page) {
+//        List<Integer> authors = authorRepository.findAllByNameContainsIgnoreCase(author, PageRequest.of(page,SEARCH_BY_AUTHOR_PAGE_SIZE)).stream().map(Author::getId).toList();
+//
+//        return bookRepository.findAllById(bookAuthorRepository.findBookAuthorsByAuthorIdIn(authors).stream().map(BookAuthor::getBookId).toList());
+        Page<Author> authorPage = authorRepository.findAllByNameContainsIgnoreCase(author, PageRequest.of(page, SEARCH_BY_AUTHOR_PAGE_SIZE));
+        List<Integer> authors = authorPage.toList().stream().map(Author::getId).toList();
 
-        return bookRepository.findAllById(bookAuthorRepository.findBookAuthorsByAuthorIdIn(authors).stream().map(BookAuthor::getBookId).toList());
+        List<String> bookIds = bookAuthorRepository.findBookAuthorsByAuthorIdIn(authors).stream().map(BookAuthor::getBookId).toList();
+
+        List<Book> books = bookRepository.findAllById(bookIds);
+
+        books.forEach(this::fillBookAdditionalInfo);
+
+        return new BookPageResult(new PaginationInfo(authorPage), books);
     }
 
     /**
@@ -97,25 +118,26 @@ public class BookService {
      * @param page
      * @return page of books
      */
-    public List<Book> searchBooks(String searchTerm, Integer page) {
-        List<Book> books = new ArrayList<>();
+    public BookPageResult searchBooks(String searchTerm, Integer page) {
+//        List<Book> books = new ArrayList<>();
+//
+//        books.addAll(findBookByTitle(searchTerm, page));
+//        books.addAll(findBookByAuthor(searchTerm, page));
 
-        books.addAll(findBookByTitle(searchTerm, page));
-        books.addAll(findBookByAuthor(searchTerm, page));
-
-        return books;
+        return BookPageResult.merge(findBookByTitle(searchTerm, page), findBookByAuthor(searchTerm, page));
     }
 
-    public List<Book> findBookByGenre(Integer genreId, Integer page, Integer size) {
+    public BookPageResult findBookByGenre(Integer genreId, Integer page, Integer size) {
         if(size == null) {
             size = PAGE_SIZE;
         }
-        List<String> bookIds = bookGenreRepository.findBookGenresByGenreId(genreId, PageRequest.of(page, size)).stream().map(BookGenre::getBookId).toList();
+        Page<BookGenre> bookGenresPage = bookGenreRepository.findBookGenresByGenreId(genreId, PageRequest.of(page, size));
+        List<String> bookIds = bookGenresPage.stream().map(BookGenre::getBookId).toList();
 
         List<Book> books = bookRepository.findAllById(bookIds);
 
         books.forEach(this::fillBookAdditionalInfo);
-        return books;
+        return new BookPageResult(new PaginationInfo(bookGenresPage), books);
     }
 
     private void fillBookAdditionalInfo(Book book) {
@@ -130,5 +152,9 @@ public class BookService {
 
         book.setGenres(genres.stream().map(Genre::getName).toList());
         book.setAuthors(authors.stream().map(Author::getName).toList());
+    }
+
+    public List<Book> findBooksByIds(List<String> ids) {
+        return bookRepository.findAllById(ids);
     }
 }

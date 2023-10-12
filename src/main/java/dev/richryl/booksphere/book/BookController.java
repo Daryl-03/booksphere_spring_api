@@ -17,7 +17,7 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getBooks(@RequestParam @Min(0) Integer page, @RequestParam(required = false) @Min(0) Integer pageSize) {
+    public BookPageResult getBooks(@RequestParam @Min(0) Integer page, @RequestParam(required = false) @Min(0) Integer pageSize) {
         return bookService.getBooks(page, pageSize);
     }
 
@@ -27,22 +27,32 @@ public class BookController {
     }
 
     @GetMapping(path = "search/{searchTerm}")
-    public List<Book> searchBooks(@PathVariable String searchTerm, @RequestParam(required = false) @Min(0) Integer page) {
+    public BookPageResult searchBooks(@PathVariable String searchTerm, @RequestParam(required = false) @Min(0) Integer page) {
         return bookService.searchBooks(searchTerm, page==null?0:page);
     }
 
     @GetMapping(path = "searchByAuthor/{searchTerm}")
-    public List<Book> searchBooksByAuthor(@PathVariable String searchTerm, @RequestParam(required = false) @Min(0) Integer page) {
+    public BookPageResult searchBooksByAuthor(@PathVariable String searchTerm, @RequestParam(required = false) @Min(0) Integer page) {
         return bookService.findBookByAuthor(searchTerm, page==null?0:page);
     }
 
+    @GetMapping(path = "searchByTitle/{searchTerm}")
+    public BookPageResult searchBooksByTitle(@PathVariable String searchTerm, @RequestParam(required = false) @Min(0) Integer page) {
+        return bookService.findBookByTitle(searchTerm, page==null?0:page);
+    }
+
     @GetMapping(path = "getByGenre/{id}")
-    public List<Book> getBooksByGenre(@PathVariable Integer id, @RequestParam(required = false) @Min(0) Integer page, @RequestParam(required = false) @Min(0) Integer pageSize) {
+    public BookPageResult getBooksByGenre(@PathVariable Integer id, @RequestParam(required = false) @Min(0) Integer page, @RequestParam(required = false) @Min(0) Integer pageSize) {
         return bookService.findBookByGenre(id, page==null?0:page, pageSize);
     }
 
     @GetMapping(path = "getByIsbn/{isbn}")
     public Book getBookByIsbn(@PathVariable String isbn) {
         return bookService.findBookByIsbn13(isbn);
+    }
+
+    @GetMapping("/getBooksByIds")
+    public List<Book> getBooksByIds(@RequestParam List<String> ids) {
+        return bookService.findBooksByIds(ids);
     }
 }

@@ -3,6 +3,8 @@ package dev.richryl.booksphere.rating;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/rating")
 public class RatingController {
@@ -23,6 +25,11 @@ public class RatingController {
 //        ratingService.save(rating);
 //    }
 
+    @GetMapping(path = "/getByBookId/{userId}")
+    public List<Rating> getRatingsByUserId(@PathVariable("userId") String userId) {
+        return ratingService.findAllByUserId(userId);
+    }
+
     @PutMapping
     public void updateRating(@RequestParam String userId, @RequestParam Rating rating) {
         ratingService.updateRating(userId, rating);
@@ -38,4 +45,8 @@ public class RatingController {
         ratingService.deleteByUserIdAndBookId(userId, bookId);
     }
 
+    @GetMapping(path = "/getByBookIdAndUserId")
+    public Rating getRatingByBookIdAndUserId(@RequestParam("bookId") String bookId, @RequestParam("userId") String userId) {
+        return ratingService.findByBookIdAndUserId(bookId, userId);
+    }
 }

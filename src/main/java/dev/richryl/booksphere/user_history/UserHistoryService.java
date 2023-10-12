@@ -2,6 +2,8 @@ package dev.richryl.booksphere.user_history;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserHistoryService {
 
@@ -12,14 +14,14 @@ public class UserHistoryService {
     }
 
     public UserHistory save(UserHistory userHistory) {
-        int id = userHistoryRepository.findByUserIdAndBookId(userHistory.getUserId(), userHistory.getBookId());
+        int id = userHistoryRepository.findByUserIdAndBookId(userHistory.getUserId(), userHistory.getBookId()).getId();
         if (id != 0) {
             userHistory.setId(id);
         }
         return userHistoryRepository.save(userHistory);
     }
 
-    public Integer findByUserIdAndBookId(String userId, String bookId) {
+    public UserHistory findByUserIdAndBookId(String userId, String bookId) {
         return userHistoryRepository.findByUserIdAndBookId(userId, bookId);
     }
 
@@ -32,6 +34,26 @@ public class UserHistoryService {
     }
 
     public void deleteByUserIdAndBookId(String userId, String bookId) {
-        userHistoryRepository.deleteById(findByUserIdAndBookId(userId, bookId));
+        userHistoryRepository.deleteByUserIdAndBookId(userId, bookId);
+    }
+
+    public void deleteAllByUserId(String userId) {
+        userHistoryRepository.deleteAll(userHistoryRepository.findAllByUserId(userId));
+    }
+
+    public void deleteAll() {
+        userHistoryRepository.deleteAll();
+    }
+
+    public Integer countByUserId(String userId) {
+        return userHistoryRepository.findAllByUserId(userId).size();
+    }
+
+    public boolean existsByUserIdAndBookId(String userId, String bookId) {
+        return userHistoryRepository.findByUserIdAndBookId(userId, bookId) != null;
+    }
+
+    public List<UserHistory> findAllByUserId(String userId) {
+        return userHistoryRepository.findAllByUserId(userId);
     }
 }
