@@ -1,6 +1,7 @@
 package dev.richryl.booksphere.user_history;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,9 +15,9 @@ public class UserHistoryService {
     }
 
     public UserHistory save(UserHistory userHistory) {
-        int id = userHistoryRepository.findByUserIdAndBookId(userHistory.getUserId(), userHistory.getBookId()).getId();
-        if (id != 0) {
-            userHistory.setId(id);
+        UserHistory history = userHistoryRepository.findByUserIdAndBookId(userHistory.getUserId(), userHistory.getBookId());
+        if(history != null) {
+            userHistory.setId(history.getId());
         }
         return userHistoryRepository.save(userHistory);
     }
@@ -29,18 +30,22 @@ public class UserHistoryService {
         return userHistoryRepository.findById(id).orElse(null);
     }
 
+    @Transactional
     public void deleteById(Integer id) {
         userHistoryRepository.deleteById(id);
     }
 
+    @Transactional
     public void deleteByUserIdAndBookId(String userId, String bookId) {
         userHistoryRepository.deleteByUserIdAndBookId(userId, bookId);
     }
 
+    @Transactional
     public void deleteAllByUserId(String userId) {
         userHistoryRepository.deleteAll(userHistoryRepository.findAllByUserId(userId));
     }
 
+    @Transactional
     public void deleteAll() {
         userHistoryRepository.deleteAll();
     }

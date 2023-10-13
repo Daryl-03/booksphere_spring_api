@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "user_history")
 public class UserHistory {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String userId;
     private String bookId;

@@ -155,6 +155,10 @@ public class BookService {
     }
 
     public List<Book> findBooksByIds(List<String> ids) {
-        return bookRepository.findAllById(ids);
+        List<Book> books = bookRepository.findAllById(ids);
+
+        books.forEach(this::fillBookAdditionalInfo);
+
+        return books;
     }
 }

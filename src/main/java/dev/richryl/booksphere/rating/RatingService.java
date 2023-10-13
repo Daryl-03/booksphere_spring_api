@@ -4,6 +4,7 @@ import dev.richryl.booksphere.book.Book;
 import dev.richryl.booksphere.book.BookRepository;
 import dev.richryl.booksphere.exception.EntityException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,9 +24,9 @@ public class RatingService {
             throw new EntityException("Book not found");
         }
 
-        int id = ratingRepository.findByBookIdAndUserId(rating.getBookId(), rating.getUserId()).getId();
-        if (id != 0) {
-            rating.setId(id);
+        Rating oldRating = ratingRepository.findByBookIdAndUserId(rating.getBookId(), rating.getUserId());
+        if (oldRating != null) {
+            rating.setId(oldRating.getId());
         }
         ratingRepository.save(rating);
         updateBookGeneralRating(rating.getBookId());
@@ -44,11 +45,13 @@ public class RatingService {
         updateBookGeneralRating(rating.getBookId());
     }
 
+    @Transactional
     public void delete(Rating rating) {
         ratingRepository.delete(rating);
         updateBookGeneralRating(rating.getBookId());
     }
 
+    @Transactional
     public void deleteByUserIdAndBookId(String userId, String bookId) {
         ratingRepository.deleteByUserIdAndBookId(userId, bookId);
         updateBookGeneralRating(bookId);
