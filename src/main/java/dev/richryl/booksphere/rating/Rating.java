@@ -16,5 +16,5 @@ public class Rating {
     private Integer id;
     private String userId;
     private String bookId;
-    private Integer rating;
+    private Double rating;
 }

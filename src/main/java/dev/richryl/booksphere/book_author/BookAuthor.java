@@ -1,5 +1,6 @@
 package dev.richryl.booksphere.book_author;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -15,6 +16,8 @@ import lombok.NoArgsConstructor;
 public class BookAuthor {
     @Id
     private Integer id;
+    @Column(name = "book_id")
     private String bookId;
+    @Column(name = "author_id")
     private Integer authorId;
 }

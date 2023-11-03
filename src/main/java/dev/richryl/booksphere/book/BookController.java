@@ -16,6 +16,11 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @GetMapping("/testFetch")
+    public BookPageResult testFetch(@RequestParam(required = false) @Min(0) Integer page, @RequestParam(required = false) @Min(0) Integer pageSize) {
+        return bookService.testFetch(page, pageSize);
+    }
+
     @GetMapping
     public BookPageResult getBooks(@RequestParam @Min(0) Integer page, @RequestParam(required = false) @Min(0) Integer pageSize) {
         return bookService.getBooks(page, pageSize);

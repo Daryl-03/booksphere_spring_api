@@ -37,6 +37,26 @@ public class BookService {
         this.bookAuthorRepository = bookAuthorRepository;
     }
 
+    public BookPageResult testFetch(Integer page, Integer size){
+        if(size == null) {
+            size = PAGE_SIZE;
+        }
+        Page<Book> bookPage = bookRepository.findAll(PageRequest.of(page, size, Sort.sort(Book.class).by(Book::getRating).descending()));
+        List<Book> books = bookPage.toList();
+
+//        books.forEach(this::fillBookAdditionalInfo);
+
+        return new BookPageResult(
+            new PaginationInfo(
+                    bookPage.getTotalElements(),
+                    bookPage.getNumber(),
+                    bookPage.getSize(),
+                    bookPage.getTotalPages()
+                    ),
+                books
+                );
+    }
+
     /**
      * return specified page of books
      *
@@ -50,7 +70,7 @@ public class BookService {
         Page<Book> bookPage = bookRepository.findAll(PageRequest.of(page, size, Sort.sort(Book.class).by(Book::getRating).descending()));
         List<Book> books = bookPage.toList();
 
-        books.forEach(this::fillBookAdditionalInfo);
+//        books.forEach(this::fillBookAdditionalInfo);
 
 //        System.out.println("first one genres size = " + books.get(0).getGenres().size());
 
@@ -83,7 +103,7 @@ public class BookService {
         Page<Book> bookPage = bookRepository.findAllByTitleContainsIgnoreCaseOrderByRatingDesc(title, PageRequest.of(page, PAGE_SIZE));
         List<Book> books = bookPage.toList();
 
-        books.forEach(this::fillBookAdditionalInfo);
+//        books.forEach(this::fillBookAdditionalInfo);
 
         return new BookPageResult(new PaginationInfo(bookPage), books);
     }
@@ -91,7 +111,7 @@ public class BookService {
     public Book findBookByIsbn13(String isbn) {
         Book book = bookRepository.findByIsbn(isbn);
 
-        fillBookAdditionalInfo(book);
+//        fillBookAdditionalInfo(book);
 
         return book;
     }
@@ -107,7 +127,7 @@ public class BookService {
 
         List<Book> books = bookRepository.findAllById(bookIds);
 
-        books.forEach(this::fillBookAdditionalInfo);
+//        books.forEach(this::fillBookAdditionalInfo);
 
         return new BookPageResult(new PaginationInfo(authorPage), books);
     }
@@ -136,7 +156,7 @@ public class BookService {
 
         List<Book> books = bookRepository.findAllById(bookIds);
 
-        books.forEach(this::fillBookAdditionalInfo);
+//        books.forEach(this::fillBookAdditionalInfo);
         return new BookPageResult(new PaginationInfo(bookGenresPage), books);
     }
 
@@ -150,14 +170,16 @@ public class BookService {
         List<Genre> genres = genreRepository.findAllById(genresId);
         List<Author> authors = authorRepository.findAllById(authorsId);
 
-        book.setGenres(genres.stream().map(Genre::getName).toList());
-        book.setAuthors(authors.stream().map(Author::getName).toList());
+//        book.setGenres(genres.stream().map(Genre::getName).toList());
+        book.setGenres(genres);
+//        book.setAuthors(authors.stream().map(Author::getName).toList());
+        book.setAuthors(authors);
     }
 
     public List<Book> findBooksByIds(List<String> ids) {
         List<Book> books = bookRepository.findAllById(ids);
 
-        books.forEach(this::fillBookAdditionalInfo);
+//        books.forEach(this::fillBookAdditionalInfo);
 
         return books;
     }
