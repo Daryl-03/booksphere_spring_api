@@ -19,7 +19,7 @@ import java.util.List;
 public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
 
     private final FirebaseAuthenticationService firebaseAuthenticationService;
-    private List<String> excludedUrls = List.of("/api/book");
+    private List<String> excludedUrls = List.of("/api/book", "/api/book/test");
 
     public FirebaseAuthenticationFilter(FirebaseAuthenticationService firebaseAuthenticationService) {
         this.firebaseAuthenticationService = firebaseAuthenticationService;
