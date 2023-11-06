@@ -19,7 +19,7 @@ import java.util.List;
 public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
 
     private final FirebaseAuthenticationService firebaseAuthenticationService;
-    private List<String> excludedUrls = List.of("/api/book", "/api/book/test");
+    private List<String> excludedUrls = List.of("/api/book", "/api/book/test", "/api-docs", "/v3/api-docs");
 
     public FirebaseAuthenticationFilter(FirebaseAuthenticationService firebaseAuthenticationService) {
         this.firebaseAuthenticationService = firebaseAuthenticationService;
@@ -60,6 +60,6 @@ public class FirebaseAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return excludedUrls.contains(request.getRequestURI());
+        return excludedUrls.contains(request.getRequestURI()) || request.getRequestURI().startsWith("/swagger-ui") || request.getRequestURI().startsWith("/v3/api-docs");
     }
 }

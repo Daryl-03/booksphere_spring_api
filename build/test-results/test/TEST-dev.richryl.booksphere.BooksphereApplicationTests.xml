@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.richryl.booksphere.BooksphereApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-04T00:36:23" hostname="NAZARICK" time="1.707">
+<testsuite name="dev.richryl.booksphere.BooksphereApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-06T11:18:27" hostname="NAZARICK" time="1.12">
   <properties/>
-  <testcase name="contextLoads()" classname="dev.richryl.booksphere.BooksphereApplicationTests" time="1.707"/>
-  <system-out><![CDATA[01:36:08.290 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [dev.richryl.booksphere.BooksphereApplicationTests]: BooksphereApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-01:36:09.130 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration dev.richryl.booksphere.BooksphereApplication for test class dev.richryl.booksphere.BooksphereApplicationTests
+  <testcase name="contextLoads()" classname="dev.richryl.booksphere.BooksphereApplicationTests" time="1.12"/>
+  <system-out><![CDATA[12:18:10.429 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [dev.richryl.booksphere.BooksphereApplicationTests]: BooksphereApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+12:18:10.767 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration dev.richryl.booksphere.BooksphereApplication for test class dev.richryl.booksphere.BooksphereApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -13,31 +13,31 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.4)
 
-2023-11-04T01:36:10.430+01:00  INFO 9948 --- [    Test worker] d.r.b.BooksphereApplicationTests         : Starting BooksphereApplicationTests using Java 17.0.4 with PID 9948 (started by Naku in C:\Users\HP\Desktop\Naku\ESMT\LTI3\mémoire\booksphere)
-2023-11-04T01:36:10.433+01:00  INFO 9948 --- [    Test worker] d.r.b.BooksphereApplicationTests         : No active profile set, falling back to 1 default profile: "default"
-2023-11-04T01:36:12.494+01:00  INFO 9948 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-11-04T01:36:12.690+01:00  INFO 9948 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 173 ms. Found 7 JPA repository interfaces.
-2023-11-04T01:36:14.291+01:00  INFO 9948 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-11-04T01:36:14.469+01:00  INFO 9948 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
-2023-11-04T01:36:14.476+01:00  INFO 9948 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-11-04T01:36:15.021+01:00  INFO 9948 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-11-04T01:36:15.414+01:00  INFO 9948 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-11-04T01:36:15.464+01:00  INFO 9948 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-11-04T01:36:15.644+01:00  INFO 9948 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@4b3ad7ca
-2023-11-04T01:36:15.646+01:00  INFO 9948 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-11-04T01:36:16.268+01:00  INFO 9948 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-11-04T01:36:17.829+01:00  INFO 9948 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-11-04T01:36:17.835+01:00  INFO 9948 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-11-04T01:36:19.445+01:00  INFO 9948 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2023-11-04T01:36:20.664+01:00  WARN 9948 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-11-04T01:36:22.049+01:00  WARN 9948 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+2023-11-06T12:18:12.103+01:00  INFO 30052 --- [    Test worker] d.r.b.BooksphereApplicationTests         : Starting BooksphereApplicationTests using Java 17.0.4 with PID 30052 (started by Naku in C:\Users\HP\Desktop\Naku\ESMT\LTI3\mémoire\booksphere)
+2023-11-06T12:18:12.106+01:00  INFO 30052 --- [    Test worker] d.r.b.BooksphereApplicationTests         : The following 1 profile is active: "production"
+2023-11-06T12:18:14.505+01:00  INFO 30052 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-11-06T12:18:14.704+01:00  INFO 30052 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 157 ms. Found 7 JPA repository interfaces.
+2023-11-06T12:18:16.219+01:00  INFO 30052 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-11-06T12:18:16.350+01:00  INFO 30052 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.9.Final
+2023-11-06T12:18:16.358+01:00  INFO 30052 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-11-06T12:18:16.767+01:00  INFO 30052 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-11-06T12:18:17.210+01:00  INFO 30052 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-11-06T12:18:17.253+01:00  INFO 30052 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-11-06T12:18:18.909+01:00  INFO 30052 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7672960e
+2023-11-06T12:18:18.914+01:00  INFO 30052 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-11-06T12:18:19.904+01:00  INFO 30052 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-11-06T12:18:21.798+01:00  INFO 30052 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-11-06T12:18:21.805+01:00  INFO 30052 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-11-06T12:18:23.518+01:00  INFO 30052 --- [    Test worker] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2023-11-06T12:18:25.024+01:00  WARN 30052 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-11-06T12:18:26.191+01:00  WARN 30052 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: a1b6b1e0-ae2e-428b-81f8-95683a6ac075
+Using generated security password: 5f3959c7-8ad9-45a3-811b-390569cb4a04
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2023-11-04T01:36:22.361+01:00  INFO 9948 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5a95090a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@34ccce55, org.springframework.security.web.context.SecurityContextHolderFilter@59b5251d, org.springframework.security.web.header.HeaderWriterFilter@297c0311, org.springframework.security.web.authentication.logout.LogoutFilter@62a9d176, dev.richryl.booksphere.config.FirebaseAuthenticationFilter@7668edd7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4bba628, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4bb05e2a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@10374cae, org.springframework.security.web.access.ExceptionTranslationFilter@751e7d99, org.springframework.security.web.access.intercept.AuthorizationFilter@c6c5b66]
-2023-11-04T01:36:23.381+01:00  INFO 9948 --- [    Test worker] d.r.b.BooksphereApplicationTests         : Started BooksphereApplicationTests in 13.583 seconds (process running for 17.25)
+2023-11-06T12:18:26.403+01:00  INFO 30052 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@442545ab, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2ec3b5dd, org.springframework.security.web.context.SecurityContextHolderFilter@1b131102, org.springframework.security.web.header.HeaderWriterFilter@25297d52, org.springframework.security.web.authentication.logout.LogoutFilter@32a37d12, dev.richryl.booksphere.config.FirebaseAuthenticationFilter@629bee3b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@f500481, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@30628ef9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@678f685f, org.springframework.security.web.access.ExceptionTranslationFilter@30d5668a, org.springframework.security.web.access.intercept.AuthorizationFilter@c2cc406]
+2023-11-06T12:18:27.462+01:00  INFO 30052 --- [    Test worker] d.r.b.BooksphereApplicationTests         : Started BooksphereApplicationTests in 16.037 seconds (process running for 20.099)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
